@@ -40,10 +40,10 @@
                     searchPlaceholder="Search...">
                 </igx-combo>
                 <igx-simple-combo class="offset"
-                    [data]="genres"
+                    [data]="items"
                     [type]="'border'"
                     formControlName="genresSimple"
-                    placeholder="Select one genre"
+                    placeholder="Select one item"
                 ></igx-simple-combo>
                 <igx-date-picker class="offset" name="date" formControlName="date" [minValue]="minDate" [maxValue]="maxDate" placeholder="Date">
                     <igx-picker-toggle igxSuffix>
@@ -63,7 +63,7 @@
                     <input igxInput name="input2" formControlName="input2" type="text"/>
                     <label igxLabel for="input2">Input 2 TEST (without Validator)</label>
                 </igx-input-group>
-              <button igxButton="raised" (buttonClick)="setInvalid()" style="margin-top: 2rem">
+              <button igxButton="raised" (buttonClick)="setInvalid()" style="margin: 2rem 1rem 0 0">
                 set invalid
               </button>
               <button igxButton="raised" (buttonClick)="reset()" style="margin-top: 2rem">
