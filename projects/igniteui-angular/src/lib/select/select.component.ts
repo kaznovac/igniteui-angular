@@ -547,7 +547,11 @@ export class IgxSelectComponent extends IgxDropDownComponent implements IgxSelec
             }
         } else {
             // B.P. 18 May 2021: IgxDatePicker does not reset its state upon resetForm #9526
-            this.input.valid = IgxInputState.INITIAL;
+            if (this.ngControl.control.valid){
+                this.input.valid = IgxInputState.INITIAL;
+            } else {
+                this.input.valid = IgxInputState.INVALID;
+            }
         }
         this.manageRequiredAsterisk();
     }

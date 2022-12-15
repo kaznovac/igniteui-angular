@@ -1224,7 +1224,11 @@ export abstract class IgxComboBaseDirective extends DisplayDensityBase implement
             }
         } else {
             // B.P. 18 May 2021: IgxDatePicker does not reset its state upon resetForm #9526
-            this.valid = IgxComboState.INITIAL;
+            if (this.ngControl.control.valid){
+                this.valid = IgxComboState.INITIAL;
+            } else {
+                this.valid = IgxComboState.INVALID;
+            }
         }
         this.manageRequiredAsterisk();
     };
