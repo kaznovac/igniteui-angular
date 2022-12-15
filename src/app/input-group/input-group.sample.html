@@ -1,14 +1,68 @@
 <div class="input-group-sample">
         <section style="margin: 2rem">
             <form [formGroup]="form">
-              <igx-input-group>
-                <input igxInput name="input1" formControlName="input1" type="text" />
-                <label igxLabel for="input1">Input 1 (with Validator)</label>
-              </igx-input-group>
-              <igx-input-group>
-                <input igxInput name="input2" formControlName="input2" type="text"/>
-                <label igxLabel for="input2">Input 2 (without Validator)</label>
-              </igx-input-group>
+                <igx-select #select name="movies" formControlName="movie" class="offset">
+                    <igx-select-item-group *ngFor="let genre of genres" [label]="genre.type">
+                        <igx-select-item *ngFor="let movie of genre.movies" [value]="movie">
+                            {{ movie }}
+                        </igx-select-item>
+                    </igx-select-item-group>
+                    <label igxLabel for="movies">Movie</label>
+                    <ng-template igxSelectToggleIcon>
+                        <igx-icon family="material">local_movies</igx-icon>
+                    </ng-template>
+                </igx-select>
+                <igx-input-group class="offset">
+                    <input igxInput name="fullName" type="text" formControlName="fullName" />
+                    <label igxLabel for="fullName">Full Name</label>
+                    <igx-suffix>
+                        <igx-icon>person</igx-icon>
+                    </igx-suffix>
+                </igx-input-group>
+                <igx-input-group class="offset">
+                    <igx-prefix>+359</igx-prefix>
+                    <label igxLabel for="phone">Phone</label>
+                    <input igxInput name="phone" type="tel" formControlName="phone" />
+                    <igx-suffix>
+                        <igx-icon>phone</igx-icon>
+                    </igx-suffix>
+                    <igx-hint position="start">Ex.: +359 888 123 456</igx-hint>
+                </igx-input-group>
+                <igx-input-group class="offset">
+                    <label igxLabel for="email">Email address</label>
+                    <input igxInput name="email" type="email" formControlName="email" />
+                    <igx-suffix>
+                        <igx-icon>email</igx-icon>
+                    </igx-suffix>
+                </igx-input-group>
+                <igx-combo #combo1 class="offset" [itemsMaxHeight]="130" [data]="genres" [valueKey]="'type'"
+                    [displayKey]="'type'" type="border" formControlName="genres" placeholder="Select your favorite genres"
+                    searchPlaceholder="Search...">
+                </igx-combo>
+                <igx-simple-combo class="offset"
+                    [data]="genres"
+                    [type]="'border'"
+                    formControlName="genresSimple"
+                    placeholder="Select one genre"
+                ></igx-simple-combo>
+                <igx-date-picker class="offset" name="date" formControlName="date" [minValue]="minDate" [maxValue]="maxDate" placeholder="Date">
+                    <igx-picker-toggle igxSuffix>
+                        <igx-icon>today</igx-icon>
+                    </igx-picker-toggle>
+                </igx-date-picker>
+                <igx-time-picker class="offset" name="time" formControlName="time" [minValue]="minTime" [maxValue]="maxTime" placeholder="Time">
+                    <igx-picker-toggle igxSuffix>
+                        <igx-icon>access_time</igx-icon>
+                    </igx-picker-toggle>
+                </igx-time-picker>
+                <igx-input-group style="margin-top: 5 rem">
+                    <input igxInput name="input1" formControlName="input1" type="text" />
+                    <label igxLabel for="input1">Input 1 TEST (with Validator)</label>
+                </igx-input-group>
+                <igx-input-group>
+                    <input igxInput name="input2" formControlName="input2" type="text"/>
+                    <label igxLabel for="input2">Input 2 TEST (without Validator)</label>
+                </igx-input-group>
               <button igxButton="raised" (buttonClick)="setInvalid()" style="margin-top: 2rem">
                 set invalid
               </button>

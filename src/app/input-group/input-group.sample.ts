@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { UntypedFormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import {
     IgxInputGroupType,
@@ -42,20 +42,50 @@ export class InputGroupSampleComponent implements OnInit, AfterViewInit {
     });
     public date = new Date();
 
+    public genres = [];
+    public minTime = '06:15:30';
+    public maxTime = '09:15:30';
+    public minDate = new Date();
+    public maxDate = new Date(new Date(this.minDate.getFullYear(), this.minDate.getMonth(), this.minDate.getDate() + 14));
+
     public form = new FormGroup({
         input1: new FormControl(null, Validators.maxLength(20)),
         input2: new FormControl(null),
+        movie: new FormControl(null),
+        fullName: new FormControl(null),
+        phone: new FormControl(null),
+        email: new FormControl(null),
+        genres: new FormControl(null),
+        genresSimple: new FormControl(null),
+        date: new FormControl(null),
+        time: new FormControl(null),
     });
     
     public setInvalid() {
         this.form.markAllAsTouched();
         this.form.get('input1').setErrors({ error: true });
         this.form.get('input2').setErrors({ error: true });
+        this.form.get('movie').setErrors({ error: true });
+        this.form.get('fullName').setErrors({ error: true });
+        this.form.get('phone').setErrors({ error: true });
+        this.form.get('email').setErrors({ error: true });
+        this.form.get('genres').setErrors({ error: true });
+        this.form.get('genresSimple').setErrors({ error: true });
+        this.form.get('date').setErrors({ error: true });
+        this.form.get('time').setErrors({ error: true });
     }
 
     public reset(){
         this.form.get('input1').reset();
         this.form.get('input2').reset();
+        this.form.get('movie').reset();
+        this.form.get('fullName').reset();
+        this.form.get('phone').reset();
+        this.form.get('email').reset();
+        this.form.get('genres').reset();
+        this.form.get('genresSimple').reset();
+        this.form.get('date').reset();
+        this.form.get('time').reset();
     }
 
     constructor(
@@ -100,6 +130,24 @@ export class InputGroupSampleComponent implements OnInit, AfterViewInit {
                 label: 'Box',
                 togglable: true,
             },
+        ];
+
+        this.genres = [
+            { type: 'Action', movies: ['The Matrix', 'Kill Bill: Vol.1', 'The Dark Knight Rises'] },
+            { type: 'Adventure', movies: ['Interstellar', 'Inglourious Basterds', 'Inception'] },
+            {
+                type: 'Comedy', movies: ['Wild Tales', 'In Bruges', 'Three Billboards Outside Ebbing, Missouri',
+                    'Untouchable', '3 idiots']
+            },
+            { type: 'Crime', movies: ['Training Day', 'Heat', 'American Gangster'] },
+            { type: 'Drama', movies: ['Fight Club', 'A Beautiful Mind', 'Good Will Hunting', 'City of God'] },
+            { type: 'Biography', movies: ['Amadeus', 'Bohemian Rhapsody'] },
+            { type: 'Mystery', movies: ['The Prestige', 'Memento', 'Cloud Atlas'] },
+            { type: 'Musical', movies: ['All That Jazz'] },
+            { type: 'Romance', movies: ['Love Actually', 'In The Mood for Love'] },
+            { type: 'Sci-Fi', movies: ['The Fifth Element'] },
+            { type: 'Thriller', movies: ['The Usual Suspects'] },
+            { type: 'Western', movies: ['Django Unchained'] }
         ];
     }
 
