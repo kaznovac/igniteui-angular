@@ -1,4 +1,22 @@
 <div class="input-group-sample">
+        <section style="margin: 2rem">
+            <form [formGroup]="form">
+              <igx-input-group>
+                <input igxInput name="input1" formControlName="input1" type="text" />
+                <label igxLabel for="input1">Input 1 (with Validator)</label>
+              </igx-input-group>
+              <igx-input-group>
+                <input igxInput name="input2" formControlName="input2" type="text"/>
+                <label igxLabel for="input2">Input 2 (without Validator)</label>
+              </igx-input-group>
+              <button igxButton="raised" (buttonClick)="setInvalid()" style="margin-top: 2rem">
+                set invalid
+              </button>
+              <button igxButton="raised" (buttonClick)="reset()" style="margin-top: 2rem">
+                reset
+              </button>
+            </form>
+        </section>
     <form #testForm="ngForm" class="input-group-sample-form">
         <div class="form__fields-settings">
             <strong>Select density</strong>

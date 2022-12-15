@@ -368,8 +368,12 @@ export class IgxInputDirective implements AfterViewInit, OnDestroy {
                 }
             } else {
                 // If validator is dynamically cleared, reset label's required class(asterisk) and IgxInputState #10010
-                this._valid = IgxInputState.INITIAL;
-                this.inputGroup.isRequired = false;
+                if (this.ngControl.control.valid){
+                    this._valid = IgxInputState.INITIAL;
+                    this.inputGroup.isRequired = false;
+                } else {
+                    this._valid = IgxInputState.INVALID;
+                }
             }
             this.renderer.setAttribute(this.nativeElement, 'aria-required', this.required.toString());
             const ariaInvalid = this.valid === IgxInputState.INVALID;

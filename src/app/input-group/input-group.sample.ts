@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, AfterViewInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import {
     IgxInputGroupType,
     ButtonGroupAlignment,
@@ -41,6 +41,22 @@ export class InputGroupSampleComponent implements OnInit, AfterViewInit {
       mySelectField: []
     });
     public date = new Date();
+
+    public form = new FormGroup({
+        input1: new FormControl(null, Validators.maxLength(20)),
+        input2: new FormControl(null),
+    });
+    
+    public setInvalid() {
+        this.form.markAllAsTouched();
+        this.form.get('input1').setErrors({ error: true });
+        this.form.get('input2').setErrors({ error: true });
+    }
+
+    public reset(){
+        this.form.get('input1').reset();
+        this.form.get('input2').reset();
+    }
 
     constructor(
         @Inject(DisplayDensityToken)
