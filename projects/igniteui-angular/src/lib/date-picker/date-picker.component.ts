@@ -515,6 +515,11 @@ export class IgxDatePickerComponent extends PickerBaseDirective implements Contr
         }
     }
 
+    /** @hidden @internal */
+    public onFocus() {
+        this.inputDirective.nativeElement.select();
+    }
+
     /**
      * Opens the picker's dropdown or dialog.
      *

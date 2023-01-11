@@ -10,7 +10,7 @@
         [minValue]="this.minValue" [maxValue]="this.maxValue" [spinDelta]="this.spinDelta" [spinLoop]="this.spinLoop" 
         [disabled]="this.disabled" [placeholder]="this.placeholder" [readonly]="!this.isDropdown || this.readOnly"
         [igxTextSelection]="this.isDropdown && !this.readOnly" [locale]="this.locale" [attr.aria-expanded]="!this.collapsed"
-        [attr.aria-labelledby]="this.label?.id" aria-haspopup="dialog" aria-autocomplete="none" role="combobox">
+        [attr.aria-labelledby]="this.label?.id" aria-haspopup="dialog" aria-autocomplete="none" role="combobox" (focus)="onFocus()">
 
     <igx-suffix *ngIf="!this.clearComponents.length && this.value" (click)="this.clear()">
         <igx-icon>clear</igx-icon>

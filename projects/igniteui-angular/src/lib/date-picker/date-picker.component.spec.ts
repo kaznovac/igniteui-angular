@@ -122,6 +122,17 @@ describe('IgxDatePicker', () => {
 
                 closingSub.unsubscribe();
             }));
+            fit('should select the date picker input on focus', fakeAsync(() => {
+                //const input = fixture.debugElement.query(By.css("igx-date-picker__input-date"));
+                //const input = (datePicker as any).input;
+                const input = document.getElementsByClassName('igx-input-group__input')[0] as HTMLInputElement;
+                input.focus();
+                fixture.detectChanges();
+                tick();
+
+                expect(input.selectionStart).toEqual(0);
+                expect(input.selectionEnd).toEqual(10);
+            }));
         });
 
         describe('Keyboard navigation', () => {

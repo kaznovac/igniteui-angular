@@ -120,6 +120,24 @@ export class MaskParsingService {
             cursor = Math.max(cursor, end);
         }
 
+        //fix
+        // if (value.length <= 1) {
+        //     let isDelete = false;
+        //     cursor = start;
+        //     for (let i = 0; i < literalsPositions.length; i++) {
+        //         if (value === '') {
+        //             // on `delete` the cursor should move forward by one
+        //             cursor = Math.max(cursor, end);
+        //             isDelete = true;
+        //         } else if (cursor === literalsPositions[i]) {
+        //             cursor = literalsPositions[i] + 1;
+        //         }
+        //     }
+        //     if (!isDelete) {
+        //         cursor++;
+        //     }
+        // }
+
         return { value: maskedValue, end: cursor};
     }
 

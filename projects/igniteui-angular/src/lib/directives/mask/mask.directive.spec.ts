@@ -28,7 +28,8 @@ describe('igxMask', () => {
                 PipesMaskComponent,
                 PlaceholderMaskComponent,
                 MaskTestComponent,
-                ReadonlyMaskTestComponent
+                ReadonlyMaskTestComponent,
+                InputMaskComponent
             ],
             imports: [
                 FormsModule,
@@ -179,6 +180,28 @@ describe('igxMask', () => {
         fixture.detectChanges();
 
         expect(input.nativeElement.value).toEqual('あんｓ');
+    }));
+
+    fit('Should start typing from the beginning', fakeAsync(() => {
+        const fixture = TestBed.createComponent(InputMaskComponent);
+        fixture.detectChanges();
+        tick();
+        
+        const input = fixture.debugElement.query(By.css('input'));
+        input.triggerEventHandler('focus', {});
+        fixture.detectChanges();
+
+        input.nativeElement.select();
+        fixture.detectChanges();
+
+        UIInteractions.triggerInputKeyInteraction('1', input);
+        fixture.detectChanges();
+
+        UIInteractions.triggerInputKeyInteraction('1', input);
+        fixture.detectChanges();
+
+        expect(input.nativeElement.value).toEqual('11/__/____');
+        expect(input.nativeElement.selectionStart).toEqual(2);
     }));
 
     it('Should handle the input of invalid values', fakeAsync(() => {
@@ -600,6 +623,17 @@ class MaskComponent {
     public input: ElementRef;
     public mask = '(000) 0000-000';
     public value = '1234567890';
+}
+
+@Component({
+    template: `<igx-input-group>
+                            <input #input type="text" igxInput [igxMask]="mask"/>
+                        </igx-input-group>` })
+class InputMaskComponent {
+
+    @ViewChild('input', { static: true })
+    public input: ElementRef;
+    public mask = '00/00/0000';
 }
 
 @Component({
