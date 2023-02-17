@@ -306,6 +306,12 @@ export class IgxRadioGroupDirective implements AfterContentInit, AfterViewInit, 
                 .subscribe(() => {
                     this.updateValidityOnBlur()
                 });
+
+                fromEvent(button.nativeElement, 'keyup')
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((event: KeyboardEvent) => {
+                    this.updateOnKeyUp(event)
+                });
             });
         }
     }
@@ -315,9 +321,25 @@ export class IgxRadioGroupDirective implements AfterContentInit, AfterViewInit, 
      * @internal
      */
     private updateValidityOnBlur() {
+        this.radioButtons.forEach((button) => {
+            button.focused = false;
+        });
+
         if (this.required) {
             const checked = this.radioButtons.find(x => x.checked);
             this.invalid = !checked;
+        }
+    }
+
+    /**
+     * @hidden
+     * @internal
+     */
+    private updateOnKeyUp(event: KeyboardEvent) {
+        const checkedBtn = this.radioButtons.find(x => x.checked);
+        if (checkedBtn) {
+            event.stopPropagation();
+            checkedBtn.focused = true;
         }
     }
 
